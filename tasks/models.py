@@ -2,26 +2,11 @@ from django.db import models
 from mmetrograd.users.models import User
 
 
-class Tenant(models.Model):
-    """ Модель арендатора
-    """
-    user = models.ForeignKey(
-        User, on_delete=models.CASCADE, verbose_name="Пользователь"
-    )
-
-    def __str__(self):
-        return f"{self.user}"
-
-    class Meta:
-        verbose_name = "Арендатор"
-        verbose_name_plural = "Арендаторы"
-
-
 class Task(models.Model):
     """ Модель заявки
     """
     tenant = models.ForeignKey(
-        Tenant,
+        User,
         on_delete=models.CASCADE,
         verbose_name="Арендатор",
         related_name="tasks"
@@ -45,7 +30,7 @@ class Task(models.Model):
     passport = models.PositiveBigIntegerField("Серия и номер паспорта")
 
     def __str__(self):
-        return f"{self.tenant.user.username}"
+        return f"{self.tenant.username}"
 
     class Meta:
         verbose_name = "Заявка"

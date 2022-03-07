@@ -1,7 +1,6 @@
 from django.contrib import admin
 
-from .models import Tenant, Task
+from .models import Task
 
 
-admin.site.register(Tenant)
 admin.site.register(Task)

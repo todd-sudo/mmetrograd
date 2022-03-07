@@ -10,16 +10,16 @@ from .views import (
 
 urlpatterns = [
     path(
-        "tenant/<str:user__username>/tasks",
+        "tenant/<str:username>/tasks",
         TenantTaskListView.as_view(),
         name="tenant"
     ),
     path(
-        "tenant/<str:user__username>/",
+        "tenant/<str:username>/",
         TenantTaskDetailView.as_view(),
         name="task"
     ),
-    path("tenant/<str:user__username>/create-task/", TenantTaskCreateView.as_view(), name="task_create"),
-    path("tenant/<str:user__username>/delete-task/", TenantTaskDestroyView.as_view(), name="task_delete"),
+    path("tenant/<str:username>/create-task/", TenantTaskCreateView.as_view(), name="task_create"),
+    path("tenant/<str:username>/delete-task/", TenantTaskDestroyView.as_view(), name="task_delete"),
 
 ]

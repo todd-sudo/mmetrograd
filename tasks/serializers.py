@@ -1,16 +1,18 @@
 from rest_framework.serializers import ModelSerializer
 
-from .models import Tenant, Task
+from .models import Task
+from mmetrograd.users.models import User
 
 
 class TaskListSerializer(ModelSerializer):
 
     class Meta:
         model = Task
-        fields = [
-            "inn",
-            "id",
-        ]
+        fields = "__all__"
+        # fields = [
+        #     "inn",
+        #     "id",
+        # ]
 
 
 class TaskDetailSerializer(ModelSerializer):
@@ -24,13 +26,15 @@ class TenantListTaskSerializer(ModelSerializer):
     tasks = TaskListSerializer(many=True, read_only=True)
 
     class Meta:
-        model = Tenant
-        exclude = ["user"]
+        model = User
+        fields = "__all__"
+        # exclude = ["tenant"]
 
 
 class TenantDetailTaskSerializer(ModelSerializer):
     tasks = TaskDetailSerializer(many=True, read_only=True)
 
     class Meta:
-        model = Tenant
-        exclude = ["user"]
+        model = User
+        fields = "__all__"
+        # exclude = ["tenant"]

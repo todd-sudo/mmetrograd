@@ -11,7 +11,7 @@ services:
       dockerfile: ./compose/local/django/Dockerfile
     image: mmetrograd_local_django
     container_name: mmetrograd_local_django
-    platform: linux/x86_64
+#    platform: linux/x86_64
     depends_on:
       - postgres
     volumes:
@@ -38,7 +38,7 @@ services:
   docs:
     image: mmetrograd_local_docs
     container_name: mmetrograd_local_docs
-    platform: linux/x86_64
+#    platform: linux/x86_64
     build:
       context: .
       dockerfile: ./compose/local/docs/Dockerfile
