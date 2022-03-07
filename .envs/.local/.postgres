@@ -1,0 +1,7 @@
+# PostgreSQL
+# ------------------------------------------------------------------------------
+POSTGRES_HOST=postgres
+POSTGRES_PORT=5432
+POSTGRES_DB=mmetrograd
+POSTGRES_USER=XhkgXVifxeuAKycYaKcEfKCUwqJpDRAa
+POSTGRES_PASSWORD=AGCYsKdYIs3WEKMJaa8PnrgZX7IG2Lbe30ObMRZa5I5bYzeT39T4yHRyTH8Kpxxj
