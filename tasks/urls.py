@@ -20,6 +20,6 @@ urlpatterns = [
         name="task"
     ),
     path("tenant/<str:username>/create-task/", TenantTaskCreateView.as_view(), name="task_create"),
-    path("tenant/<str:username>/delete-task/", TenantTaskDestroyView.as_view(), name="task_delete"),
+    path("tenant/<str:tenant__username>/delete-task/", TenantTaskDestroyView.as_view(), name="task_delete"),
 
 ]

@@ -58,12 +58,13 @@ class TenantTaskDestroyView(DestroyAPIView):
     http://127.0.0.1:8000/tenant/test_user/delete-task/?task_id=2
     """
     serializer_class = TenantDetailTaskSerializer
-    lookup_field = "username"
+    lookup_field = "tenant__username"
 
     def get_queryset(self):
         task_id = self.request.query_params.get("task_id")
         queryset = Task.objects.filter(
             tenant__username=self.kwargs[self.lookup_field]
         ).filter(id=task_id)
-
+        print(queryset)
+        #
         return queryset
