@@ -63,7 +63,7 @@ class TenantTaskDestroyView(DestroyAPIView):
     def get_queryset(self):
         task_id = self.request.query_params.get("task_id")
         queryset = Task.objects.filter(
-            tenant_username=self.kwargs[self.lookup_field]
+            tenant__username=self.kwargs[self.lookup_field]
         ).filter(id=task_id)
 
         return queryset
