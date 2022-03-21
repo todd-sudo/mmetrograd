@@ -7,48 +7,145 @@ Behold My Awesome Project!
 
 License: MIT
 
-## Settings
+МУП МЕТРОГРАД (ДИПЛОМНАЯ РАБОТА)
+Эндпоинты:
 
-Moved to [settings](http://cookiecutter-django.readthedocs.io/en/latest/settings.html).
+    Регистрация пользователя (POST - 201):
 
-## Basic Commands
+    http://127.0.0.1:8000/auth/users/
 
-### Setting Up Your Users
+        data (json):
 
--   To create a **normal user account**, just go to Sign Up and fill out the form. Once you submit it, you'll see a "Verify Your E-mail Address" page. Go to your console to see a simulated email verification message. Copy the link into your browser. Now the user's email should be verified and ready to go.
+           {
+               "username": "new_user_1",
+               "password": "bhoeh983yi",
+               "email": "test@mail.ru"
+           }
 
--   To create an **superuser account**, use this command:
+        response:
 
-        $ python manage.py createsuperuser
+           {
+               "username": "new_user_1",
+               "email": "test@mail.ru",
+               "id": "2",
+           }
 
-For convenience, you can keep your normal user logged in on Chrome and your superuser logged in on Firefox (or similar), so that you can see how the site behaves for both kinds of users.
 
-### Type checks
+    Авторизация пользователя (POST - 200/400):
 
-Running type checks with mypy:
+     http://127.0.0.1:8000/auth/token/login
 
-    $ mypy mmetrograd
+        data(json):
 
-### Test coverage
+        {
+             "username": "neww2",
+             "password": "bhoeh983yi"
+        }
 
-To run the tests, check your test coverage, and generate an HTML coverage report:
+        response:
 
-    $ coverage run -m pytest
-    $ coverage html
-    $ open htmlcov/index.html
+        {
+            "auth_token": "f116ac210be2ab15bcba57beaa5781772b4ec9cf"
+        }
 
-#### Running tests with pytest
 
-    $ pytest
+    Список заявок пользователя (GET - 200/404):
 
-### Live reloading and Sass CSS compilation
+    http://127.0.0.1:8000/tenant/{user_username}/tasks
 
-Moved to [Live reloading and SASS compilation](http://cookiecutter-django.readthedocs.io/en/latest/live-reloading-and-sass-compilation.html).
+        response:
 
-## Deployment
+        {
+            "id": 1,
+            "tasks": [
+                {
+                    "id": 1,
+                    "inn": "23123123123123123"
+                }
+            ]
+        }
 
-The following details how to deploy this application.
+        user_username тянется с формы авторизации
 
-### Docker
 
-See detailed [cookiecutter-django Docker documentation](http://cookiecutter-django.readthedocs.io/en/latest/deployment-with-docker.html).
+    Вывод одной заявки (GET - 200):
+
+    http://127.0.0.1:8000/tenant/{user_username}/?task_id=1
+
+        response:
+
+        {
+            "id": 1,
+            "tasks": [
+                {
+                    "id": 1,
+                    "inn": 123123,
+                    "ogrn": 123123,
+                    "individual_entrepreneur": false,
+                    "individual": true,
+                    "egr": true,
+                    "license": true,
+                    "address": "1qqwqdq",
+                    "activity": "qdqwdqwd",
+                    "term": "123 qadqd",
+                    "create_at": "2022-03-06",
+                    "fio": "qwdeqwdq qwdqwd",
+                    "phone": "13131",
+                    "passport": 123123,
+                    "tenant": 1
+                }
+           ]
+        }
+
+id таски берется из списка заявок
+
+в приложении можно не выводить "tenant": 1
+
+    Удаление заявки по id (DELETE - 204):
+
+    http://127.0.0.1:8000/tenant/{user_username}/delete-task/?task_id=1
+
+
+    Создание заявки (POST - 201):
+
+    http://127.0.0.1:8000/tenant/{user__username}/create-task/
+
+        data(json):
+
+           {
+             "inn": 0,
+             "ogrn": 0,
+             "individual_entrepreneur": true,
+             "individual": true,
+             "egr": true,
+             "license": true,
+             "address": "string",
+             "activity": "string",
+             "term": "string",
+             "fio": "string",
+             "phone": "string",
+             "passport": 0,
+             "tenant": 0
+           }
+
+        "tenant": 0 - это id пользователя(таблица АРЕНДАТОР)
+
+        response:
+
+        {
+            "id": 2,
+            "inn": 0,
+            "ogrn": 0,
+            "individual_entrepreneur": true,
+            "individual": true,
+            "egr": true,
+            "license": true,
+            "address": "string",
+            "activity": "string",
+            "term": "string",
+            "create_at": "2022-03-06",
+            "fio": "string",
+            "phone": "string",
+            "passport": 0,
+            "tenant": 2
+        }
